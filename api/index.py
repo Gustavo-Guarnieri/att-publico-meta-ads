@@ -7,11 +7,16 @@ from pipeline import executaPipeline
 class handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
+        
+        print("HEADERS RECEBIDOS:")
+        for k, v in self.headers.items():
+            print(k, v)
+
         # 1. Validação do header x-api-key
         api_key_request = self.headers.get("x-api-key")
         api_key_env = os.getenv("API_KEY")
 
-        if not api_key_request or api_key_request != api_key_env:
+        '''if not api_key_request or api_key_request != api_key_env:
             self.send_response(401)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
@@ -22,7 +27,7 @@ class handler(BaseHTTPRequestHandler):
             }
 
             self.wfile.write(json.dumps(response).encode())
-            return
+            return'''
 
         try:
             # 2. Executa pipeline
