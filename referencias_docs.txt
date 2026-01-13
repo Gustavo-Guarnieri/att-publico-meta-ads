@@ -1,0 +1,18 @@
+==== REFERÊNCIAS & DOCUMENTAÇÃO =======
+
+endpoint MIXPANEL for Query Profiles: https://developer.mixpanel.com/reference/engage-query
+
+Documentação com infor sobre substituição do publico personalizado no Meta Ads
+https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/
+
+-> Ctrl + F por "API de Substituição de Usuários"
+-> Ver sessão "Hashing e normalização para várias chaves"
+-> Ctrl + F por "Campos de objeto de payload"
+    schema: 
+        FN e LN: Use somente a a z. Apenas minúsculas, sem pontuação. Caracteres especiais no formato UTF-8.
+        EMAIL: Recorte os espaços em branco à esquerda e à direita e converta todos os caracteres em letras minúsculas.
+        PHONE: Remova símbolos, letras e zeros à esquerda. Adicione o código do país como prefixo caso o campo COUNTRY não esteja especificado.
+        COUNTRY: Use os códigos de país com duas letras minúsculas no padrão ISO 3166-1 alfa-2 (https://en.wikipedia.org/wiki/ISO_3166-2)
+
+curl POST \ --data '{ "session": { "session_id":9778993, "batch_seq":10, "last_batch_flag":true, "estimated_num_total":99996 }, "payload": { "schema": ["EMAIL","DATA_PROCESSING_OPTIONS"], "data": [ ["<HASHED_DATA>"], ["<HASHED_DATA>"] ] }, }' 
+https://graph.facebook.com/v24.0/<CUSTOM_AUDIENCE_ID>/usersreplace?access_token=<ACCESS_TOKEN>
