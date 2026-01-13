@@ -33,8 +33,5 @@ def requisicao_metaAds(dados_usuarios,total_lista, id_sessao):
         headers=headers
     )
 
-    print(response.status_code)
-    print(response.json())
-
-#{'error': {'message': '(#100) Data is missing or does not match schema', 
-# 'type': 'OAuthException', 'code': 100, 'fbtrace_id': 'AkVBHUBSX9W0B9k3P_8WIgT'}}
+    resposta_meta = f"{response.status_code} - {response.json()}"
+    return resposta_meta
